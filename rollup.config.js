@@ -25,6 +25,7 @@ export default {
     eslint(),
     rollupTypescript({
       // typescript
+      useTsconfigDeclarationDir: true
     }),
     autoExternal(),
     commonjs(),

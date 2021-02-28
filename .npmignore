@@ -1,4 +1,5 @@
 src
+!@types/**
 .git
 node_modules
 .babelrc
@@ -6,6 +7,6 @@ node_modules
 .gitignore
 .prettierrc
 jest.config.js
-tsconfig.json
 yarn-error.log
+rollup.config.js
 *.tgz

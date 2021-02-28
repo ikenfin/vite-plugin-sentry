@@ -9,7 +9,7 @@ declare module '@sentry/cli' {
   }
 
   export interface SentryCliUploadSourceMapsOptions {
-    include: string[]
+    include: string | string[]
     ignore?: string[]
     ignoreFile?: string | null
     rewrite?: boolean
@@ -32,20 +32,32 @@ declare module '@sentry/cli' {
     url?: string
   }
 
-  export interface SentryCliSetCommitsOptions {
-    repo: string
+  export interface SentryCliCommitsOptions {
     auto?: boolean
+    repo?: string
     commit?: string
     previousCommit?: string
   }
 
   export interface SentryCliReleases {
-    ['new'](release: string, options?: { projects: string[] } | string[]) : Promise<string>
-    setCommits(release: string, options: SentryCliSetCommitsOptions) : Promise<string>
+    ['new'](
+      release: string,
+      options?: { projects: string[] } | string[]
+    ): Promise<string>
+    setCommits(
+      release: string,
+      options: SentryCliCommitsOptions
+    ): Promise<string>
     finalize(release: string): Promise<string>
-    proposeVersion() : Promise<string>
-    uploadSourceMaps(release: string, options: SentryCliUploadSourceMapsOptions): Promise<string>
-    newDeploy(release: string, options: SentryCliNewDeployOptions): Promise<string>
+    proposeVersion(): Promise<string>
+    uploadSourceMaps(
+      release: string,
+      options: SentryCliUploadSourceMapsOptions
+    ): Promise<string>
+    newDeploy(
+      release: string,
+      options: SentryCliNewDeployOptions
+    ): Promise<string>
   }
 
   export interface SentryCliInstance {
@@ -54,13 +66,13 @@ declare module '@sentry/cli' {
   }
 
   class SentryCli {
-    constructor (configPath?: string | null, options?: SentryCliOptions)
+    constructor(configPath?: string | null, options?: SentryCliOptions)
 
     public releases: SentryCliReleases
 
-    public static getVersion () : string
-    public static getPath () : string
-    public static execute () : Promise<string>
+    public static getVersion(): string
+    public static getPath(): string
+    public static execute(): Promise<string>
   }
 
   export default SentryCli

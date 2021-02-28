@@ -6,11 +6,16 @@
     "allowSyntheticDefaultImports": true,
     "outDir": "./dist",
     "target": "es6",
-    "sourceMap": true
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "typeRoots": [
+      "@types/**",
+      "node_modules/@types"
+    ]
   },
   "include": [
-    "src/@types",
-    "src/index.ts"
+    "src/**/*",
+    "@types"
   ],
   "exclude": ["node_modules"]
 }

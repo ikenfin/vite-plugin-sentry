@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-sentry",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "author": "ikenfin",
   "license": "MIT",
   "main": "dist/index.js",
@@ -14,6 +14,7 @@
     "lint:tests": "eslint ./test"
   },
   "devDependencies": {
+    "@types/node": "^14.14.31",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
     "babelrc-rollup": "^3.0.0",
