@@ -75,8 +75,6 @@ export interface ViteSentryCliOptions {
     */
 
   commitsConfig: SentryCliCommitsOptions
-
-  errorHandler?: (err: Error, invokeErr: () => void) => void
 }
 
 // TODO: update return type

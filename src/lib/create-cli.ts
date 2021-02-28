@@ -2,7 +2,10 @@ import SentryCli from '@sentry/cli'
 import { ViteSentryCliOptions } from '../../index'
 import { debugLogger } from './debug-logger'
 
-export const createSentryCli = (options: ViteSentryCliOptions) => {
+export const createSentryCli = (
+  options: ViteSentryCliOptions,
+  loggerFn = debugLogger
+) => {
   const defaults = {
     debug: false,
     finalize: true,
@@ -20,7 +23,7 @@ export const createSentryCli = (options: ViteSentryCliOptions) => {
     vcsRemote: sentryOptions.vcsRemote
   })
 
-  const debug = options.debug ? debugLogger : () => {}
+  const debug = options.debug ? loggerFn : () => {}
 
   // copied from sentry webpack plugin
   if (options.dryRun) {
