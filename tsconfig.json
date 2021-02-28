@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "ES6",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "./dist",
+    "target": "es6",
+    "sourceMap": true
+  },
+  "include": [
+    "src/@types",
+    "src/index.ts"
+  ],
+  "exclude": ["node_modules"]
+}

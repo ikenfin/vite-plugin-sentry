@@ -1,0 +1,26 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint/eslint-plugin"],
+  "rules": {
+    "lines-around-comment": ["error", {
+      "beforeBlockComment": true
+    }],
+    "semi": ["error", "never"],
+    "indent": [
+      "error",
+      2
+    ],
+    "array-bracket-spacing": [
+      "error",
+      "always"
+    ],
+    "space-before-function-paren": [
+      "error",
+      "always"
+    ],
+    "brace-style": [
+      "error",
+      "stroustrup"
+    ]
+  }
+}

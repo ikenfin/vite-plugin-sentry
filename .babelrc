@@ -1,0 +1,16 @@
+{
+  "env": {
+    "production": {
+      "presets": [["@babel/preset-env", {
+        "modules":false,
+        "targets": {
+          "browsers": ["last 2 versions", "ie >= 9"]
+        }
+      }]],
+      "plugins": ["@babel/transform-object-assign"]
+    },
+    "test": {
+      "plugins": ["transform-es2015-modules-commonjs", "@babel/plugin-proposal-object-rest-spread"]
+    }
+  }
+}

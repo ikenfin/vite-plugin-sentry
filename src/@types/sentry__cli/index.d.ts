@@ -1,0 +1,67 @@
+declare module '@sentry/cli' {
+  export interface SentryCliOptions {
+    silent: boolean
+    org: string
+    project: string
+    authToken: string
+    url?: string
+    vcsRemote?: string
+  }
+
+  export interface SentryCliUploadSourceMapsOptions {
+    include: string[]
+    ignore?: string[]
+    ignoreFile?: string | null
+    rewrite?: boolean
+    sourceMapReference?: boolean
+    stripPrefix?: string[]
+    stripCommonPrefix?: boolean
+    validate?: boolean
+    urlPrefix?: string
+    urlSuffix?: string
+    ext?: string[]
+    projects?: string[]
+  }
+
+  export interface SentryCliNewDeployOptions {
+    env: string
+    started?: number
+    finished?: number
+    time?: number
+    name?: string
+    url?: string
+  }
+
+  export interface SentryCliSetCommitsOptions {
+    repo: string
+    auto?: boolean
+    commit?: string
+    previousCommit?: string
+  }
+
+  export interface SentryCliReleases {
+    ['new'](release: string, options?: { projects: string[] } | string[]) : Promise<string>
+    setCommits(release: string, options: SentryCliSetCommitsOptions) : Promise<string>
+    finalize(release: string): Promise<string>
+    proposeVersion() : Promise<string>
+    uploadSourceMaps(release: string, options: SentryCliUploadSourceMapsOptions): Promise<string>
+    newDeploy(release: string, options: SentryCliNewDeployOptions): Promise<string>
+  }
+
+  export interface SentryCliInstance {
+    releases: SentryCliReleases
+    options: SentryCliOptions
+  }
+
+  class SentryCli {
+    constructor (configPath?: string | null, options?: SentryCliOptions)
+
+    public releases: SentryCliReleases
+
+    public static getVersion () : string
+    public static getPath () : string
+    public static execute () : Promise<string>
+  }
+
+  export default SentryCli
+}

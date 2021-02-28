@@ -1,0 +1,19 @@
+{
+  "trailingComma": "none",
+  "singleQuote": true,
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "tabWidth": 2,
+  "printWidth": 80,
+  "overrides": [
+    {
+      "files": ["*.js", "*.ts"],
+      "options": {
+        "jsxBracketSameLine": false,
+        "jsxSingleQuote": false,
+        "parser": "typescript",
+        "semi": false
+      }
+    }
+  ]
+}
