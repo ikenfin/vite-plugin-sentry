@@ -1,12 +1,11 @@
 import type { Plugin } from 'vite'
 import { createLogger } from 'vite'
-import { ViteSentryCliOptions } from '../index'
-import { createSentryCli, getReleasePromise } from './lib/create-cli'
+import { ViteSentryPluginOptions } from '../index'
+import { createSentryCli } from './lib/create-cli'
+import { getReleasePromise } from './lib/get-release-promise'
 
-export default function ViteSentry (options: ViteSentryCliOptions) {
+export default function ViteSentry (options: ViteSentryPluginOptions) {
   const cli = createSentryCli(options)
-  const release = getReleasePromise(cli, options)
-
   const logger = createLogger()
 
   // is plugin enabled
@@ -16,6 +15,12 @@ export default function ViteSentry (options: ViteSentryCliOptions) {
     name: 'sentry',
     enforce: 'post',
     apply: 'build',
+
+    /*
+      Check incoming config and decise - enable plugin or not
+      We don't want enable plugin for non-production environments
+      also we dont't want to enable with disabled sourcemaps
+    */
     configResolved (config) {
       if (config.isProduction && config.build.sourcemap) {
         enabled = true
@@ -31,48 +36,60 @@ export default function ViteSentry (options: ViteSentryCliOptions) {
 
       return null
     },
+
+    /*
+      We starting plugin here, because at the moment vite completed with building
+      so sourcemaps must be ready
+    */
     async closeBundle () {
       if (enabled) {
-        let currentRelease: string
+        const currentRelease = await getReleasePromise(cli, options)
 
-        release
-          .then((release: string) => {
-            currentRelease = release
-            return cli.releases.new(currentRelease)
-          })
-          .then(() => {
-            return cli.releases.uploadSourceMaps(
-              currentRelease,
-              options.sourceMaps
-            )
-          })
-          .then(() => {
-            const { commit, repo, auto } = options.setCommits
+        if (!currentRelease) {
+          logger.error(
+            '[vite-plugin-sentry] Release returned from sentry is empty! Please check your configs'
+          )
+        }
+        else {
+          cli.releases
+            .new(currentRelease)
+            .then(() => {
+              return cli.releases.uploadSourceMaps(
+                currentRelease,
+                options.sourceMaps
+              )
+            })
+            .then(() => {
+              const { commit, repo, auto } = options.setCommits
 
-            if (auto || (repo && commit)) {
-              return cli.releases.setCommits(currentRelease, options.setCommits)
-            }
+              if (auto || (repo && commit)) {
+                return cli.releases.setCommits(
+                  currentRelease,
+                  options.setCommits
+                )
+              }
 
-            return undefined
-          })
-          .then(() => {
-            if (options.finalize) {
-              return cli.releases.finalize(currentRelease)
-            }
-            return undefined
-          })
-          .then(() => {
-            const { env } = options.deploy || {}
+              return undefined
+            })
+            .then(() => {
+              if (options.finalize) {
+                return cli.releases.finalize(currentRelease)
+              }
+              return undefined
+            })
+            .then(() => {
+              const { env } = options.deploy || {}
 
-            if (env) {
-              return cli.releases.newDeploy(currentRelease, options.deploy)
-            }
+              if (env) {
+                return cli.releases.newDeploy(currentRelease, options.deploy)
+              }
 
-            return undefined
-          })
-          .catch((error: Error) => {
-            logger.error(`[vite-plugin-sentry] Error: ${error.message}`)
-          })
+              return undefined
+            })
+            .catch((error: Error) => {
+              logger.error(`[vite-plugin-sentry] Error: ${error.message}`)
+            })
+        }
       }
     }
   }

@@ -1,5 +1,8 @@
 import { inspect } from 'util'
 
+/*
+  Simple debug logger
+*/
 export const debugLogger = (label: string, data: any) => {
   if (data) {
     console.log(
