@@ -1,10 +1,22 @@
 {
   "name": "vite-plugin-sentry",
+  "description": "Unofficial vite plugin for Sentry",
   "version": "1.0.0",
   "author": "ikenfin",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:ikenfin/vite-plugin-sentry.git"
+  },
+  "types": "index.d.ts",
+  "keywords": [
+    "vite-plugin",
+    "sentry",
+    "sentry-cli",
+    "sourcemap"
+  ],
   "scripts": {
     "bundle": "NODE_ENV=production rollup -c",
     "dev": "NODE_ENV=develop rollup -c",
