@@ -8,19 +8,19 @@ import type {
 export interface ViteSentryCliOptions {
 
   /*
-      Show debug messages during run
+    Show debug messages during run
   */
 
   debug?: boolean
 
   /*
-     Dry run mode
-   */
+    Dry run mode
+  */
 
   dryRun?: boolean
 
   /*
-      Sentry required arguments
+    Sentry required arguments
   */
 
   url?: string
@@ -34,47 +34,47 @@ export interface ViteSentryCliOptions {
   vcsRemote?: string
 
   /*
-      Path to sentry cli config file
-    */
+    Path to sentry cli config file
+  */
 
   configFile?: string
 
   /*
-      Unique name for release
-      defaults to sentry-cli releases propose version (requires access to GIT and root directory to be repo)
-    */
+    Unique name for release
+    defaults to sentry-cli releases propose version (requires access to GIT and root directory to be repo)
+  */
 
   release?: string
 
   /*
-      Determines whether processed release should be automatically finalized after artifacts upload
-    */
+    Determines whether processed release should be automatically finalized after artifacts upload
+  */
 
   finalize?: boolean
 
   /*
-      If true, all logs are suppressed
-    */
+    If true, all logs are suppressed
+  */
 
   silent?: boolean
 
   /*
-      Deployment settings
-    */
+    Deployment settings
+  */
 
-  deployConfig: SentryCliNewDeployOptions
-
-  /*
-      Source maps settings
-    */
-
-  sourceMapsConfig: SentryCliUploadSourceMapsOptions
+  deploy: SentryCliNewDeployOptions
 
   /*
-      Commits seettings
-    */
+    Source maps settings
+  */
 
-  commitsConfig: SentryCliCommitsOptions
+  sourceMaps: SentryCliUploadSourceMapsOptions
+
+  /*
+    Commits seettings
+  */
+
+  setCommits: SentryCliCommitsOptions
 }
 
 // TODO: update return type

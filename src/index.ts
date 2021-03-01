@@ -43,17 +43,14 @@ export default function ViteSentry (options: ViteSentryCliOptions) {
           .then(() => {
             return cli.releases.uploadSourceMaps(
               currentRelease,
-              options.sourceMapsConfig
+              options.sourceMaps
             )
           })
           .then(() => {
-            const { commit, repo, auto } = options.commitsConfig
+            const { commit, repo, auto } = options.setCommits
 
             if (auto || (repo && commit)) {
-              return cli.releases.setCommits(
-                currentRelease,
-                options.commitsConfig
-              )
+              return cli.releases.setCommits(currentRelease, options.setCommits)
             }
 
             return undefined
@@ -65,13 +62,10 @@ export default function ViteSentry (options: ViteSentryCliOptions) {
             return undefined
           })
           .then(() => {
-            const { env } = options.deployConfig || {}
+            const { env } = options.deploy || {}
 
             if (env) {
-              return cli.releases.newDeploy(
-                currentRelease,
-                options.deployConfig
-              )
+              return cli.releases.newDeploy(currentRelease, options.deploy)
             }
 
             return undefined
