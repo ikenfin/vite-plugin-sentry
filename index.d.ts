@@ -1,3 +1,5 @@
+import type { Plugin } from 'vite'
+
 ///<reference path="@types/sentry__cli/index.d.ts" />
 import type {
   SentryCliCommitsOptions,
@@ -5,7 +7,7 @@ import type {
   SentryCliUploadSourceMapsOptions
 } from '@sentry/cli'
 
-export interface ViteSentryCliOptions {
+export interface ViteSentryPluginOptions {
 
   /*
     Show debug messages during run
@@ -78,4 +80,4 @@ export interface ViteSentryCliOptions {
 }
 
 // TODO: update return type
-export default function (options: ViteSentryCliOptions): any
+export default function (options: ViteSentryPluginOptions): Plugin
