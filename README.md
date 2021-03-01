@@ -13,7 +13,7 @@ It's fully written on Typescript and there is some differences in configuration,
 ## Install
 
 ```sh
-yarn install
+yarn install vite-plugin-sentry
 ```
 
 ## Configuration
@@ -108,7 +108,7 @@ With `sourceMaps` you can configure how sourcemaps will be processed
 
 #### setCommits settings
 
-With `setCommits` you can configure 
+With `setCommits` you can configure
 
 | Option         | Type    | Required             | Description                                                  |
 | -------------- | ------- | -------------------- | ------------------------------------------------------------ |
