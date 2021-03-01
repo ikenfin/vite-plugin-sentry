@@ -20,7 +20,6 @@ declare module '@sentry/cli' {
     urlPrefix?: string
     urlSuffix?: string
     ext?: string[]
-    projects?: string[]
   }
 
   export interface SentryCliNewDeployOptions {
