@@ -11,6 +11,11 @@
     "url": "git@github.com:ikenfin/vite-plugin-sentry.git"
   },
   "types": "index.d.ts",
+  "files": [
+    "index.d.ts",
+    "src/@types/*",
+    "dist/*"
+  ],
   "keywords": [
     "vite-plugin",
     "sentry",

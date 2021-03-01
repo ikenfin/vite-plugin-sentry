@@ -9,13 +9,12 @@
     "sourceMap": true,
     "moduleResolution": "node",
     "typeRoots": [
-      "@types/**",
+      "./src/@types/**",
       "node_modules/@types"
-    ]
+    ],
   },
   "include": [
-    "src/**/*",
-    "@types"
+    "src/**/*"
   ],
   "exclude": ["node_modules"]
 }

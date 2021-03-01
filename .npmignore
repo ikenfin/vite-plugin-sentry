@@ -1,6 +1,7 @@
 src
-!@types/**
+!src/@types/**
 .git
+.DS_Store
 node_modules
 .babelrc
 .eslintrc.json

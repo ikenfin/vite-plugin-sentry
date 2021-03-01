@@ -1,6 +1,6 @@
 import type { Plugin } from 'vite'
 
-///<reference path="@types/sentry__cli/index.d.ts" />
+///<reference types="./src/@types/sentry__cli/index.d.ts" />
 import type {
   SentryCliCommitsOptions,
   SentryCliNewDeployOptions,
