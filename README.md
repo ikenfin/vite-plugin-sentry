@@ -13,7 +13,7 @@ It's fully written on Typescript and there is some differences in configuration,
 ## Install
 
 ```sh
-yarn install vite-plugin-sentry
+yarn add vite-plugin-sentry
 ```
 
 ## Configuration
