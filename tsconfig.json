@@ -7,8 +7,9 @@
     "outDir": "./dist",
     "target": "es6",
     "sourceMap": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "typeRoots": ["./types"]
   },
-  "include": ["src/**/*", "types"],
+  "include": ["."],
   "exclude": ["node_modules"]
 }

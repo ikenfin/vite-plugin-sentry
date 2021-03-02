@@ -1,8 +1,11 @@
+/// <reference path="types/sentry__cli/index.d.ts" />
+
 import type { Plugin } from 'vite'
 
 /*
   Common types
 */
+
 import type {
   SentryCliCommitsOptions,
   SentryCliUploadSourceMapsOptions,
