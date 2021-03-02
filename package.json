@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-sentry",
   "description": "Unofficial vite plugin for Sentry",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "ikenfin",
   "license": "MIT",
   "main": "dist/index.js",
@@ -47,8 +47,7 @@
     "typescript": "^4.2.2"
   },
   "dependencies": {
-    "@sentry/cli": "^1.63.0",
-    "@types/sentry__cli": "file:./types/sentry__cli"
+    "@sentry/cli": "^1.63.0"
   },
   "peerDependencies": {
     "vite": "^2.0.4"
