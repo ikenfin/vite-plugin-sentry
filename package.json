@@ -13,7 +13,7 @@
   "types": "index.d.ts",
   "files": [
     "index.d.ts",
-    "src/@types/*",
+    "types/*",
     "dist/*"
   ],
   "keywords": [
@@ -48,6 +48,7 @@
     "vite": "^2.0.4"
   },
   "dependencies": {
-    "@sentry/cli": "^1.63.0"
+    "@sentry/cli": "^1.63.0",
+    "@types/sentry__cli": "file:./types/sentry__cli"
   }
 }
