@@ -1,5 +1,6 @@
+import type { ViteSentryPluginOptions } from '../..'
+
 import SentryCli from '@sentry/cli'
-import { ViteSentryPluginOptions } from '../../index'
 import { createFakeCli } from './create-fake-cli'
 
 /*

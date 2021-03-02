@@ -1,6 +1,7 @@
 import type { Plugin } from 'vite'
+import type { ViteSentryPluginOptions } from '..'
+
 import { createLogger } from 'vite'
-import { ViteSentryPluginOptions } from '../index'
 import { createSentryCli } from './lib/create-cli'
 import { getReleasePromise } from './lib/get-release-promise'
 
