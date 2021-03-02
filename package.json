@@ -1,14 +1,15 @@
 {
   "name": "vite-plugin-sentry",
-  "description": "Unofficial vite plugin for Sentry",
+  "description": "The unofficial Sentry plugin for Vite ⚡️",
   "version": "1.0.7",
   "author": "ikenfin",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
+  "homepage": "https://github.com/ikenfin/vite-plugin-sentry",
   "repository": {
     "type": "git",
-    "url": "git@github.com:ikenfin/vite-plugin-sentry.git"
+    "url": "https://github.com/ikenfin/vite-plugin-sentry"
   },
   "files": [
     "index.d.ts",
