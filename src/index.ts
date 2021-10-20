@@ -34,8 +34,6 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
           '[vite-plugin-sentry] ViteSentry skipped because [options.sourcemap] is not enabled!'
         )
       }
-
-      return null
     },
 
     /*
