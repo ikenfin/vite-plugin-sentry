@@ -6,8 +6,6 @@
 
 > Vite plugin acts as interface to SentryCLI
 
-[![Support Richard M. Stallman](https://raw.githubusercontent.com/rms-support-letter/rms-support-letter.github.io/master/assets/badge-64-w-border.png)](https://rms-support-letter.github.io/)
-
 It's a port of official [Sentry webpack plugin](https://github.com/getsentry/sentry-webpack-plugin) for Vite.
 
 It's fully written on Typescript and there is some differences in configuration, described below.
