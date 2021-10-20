@@ -1,7 +1,6 @@
 // rollup.config.js
 import pkg from './package.json'
 import babel from '@rollup/plugin-babel'
-import babelrc from 'babelrc-rollup'
 import commonjs from '@rollup/plugin-commonjs'
 import eslint from '@rollup/plugin-eslint'
 import autoExternal from 'rollup-plugin-auto-external'
@@ -31,10 +30,11 @@ export default {
     }),
     autoExternal(),
     commonjs(),
-    babel(
-      babelrc({
-        addExternalHelpersPlugin: false
-      })
-    )
+
+    babel({
+      babelrc: true,
+      babelHelpers: 'bundled',
+      extensions: [ '.js', '.ts' ]
+    })
   ]
 }
