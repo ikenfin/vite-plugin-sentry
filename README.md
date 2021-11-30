@@ -58,22 +58,23 @@ export default defineConfig({
 
 Here are the list of all plugin options:
 
-| Option     | Type                             | Required | Default value        | Description                                                  |
-| ---------- | -------------------------------- | -------- | -------------------- | ------------------------------------------------------------ |
-| debug      | boolean                          | ❌        | false                | Show debug messages during run                               |
-| dryRun     | boolean                          | ❌        | false                | Run sentry in dry mode - will only prints all steps          |
-| url        | string                           | ❌        | 'https://sentry.io/' | The base URL of your Sentry instance.                        |
-| authToken  | string                           | ✅        | ''                   | The authentication token to use for all communication with Sentry. Can be obtained from https://sentry.io/settings/account/api/auth-tokens/. Required scopes: `project:releases` (and `org:read` if `setCommits` option is used). |
-| org        | string                           | ✅        | ''                   | The slug of the Sentry organization associated with the app. |
-| project    | string                           | ✅        | ''                   | The slug of the Sentry project associated with the app.      |
-| vcsRemote  | string                           | ❌        | 'origin'             | The name of the remote in the version control system.        |
-| configFile | string                           | ❌        | ''                   | Path to sentry cli config file, as described in https://docs.sentry.io/product/cli/configuration/#configuration-file. By default, the config file is looked for upwards from the current path, and defaults from `~/.sentryclirc` are always loaded |
-| release    | string                           | ❌        |                      | Unique name for release. Defaults to sentry-cli releases propose version (requires access to GIT and root directory to be repo) |
-| finalize   | boolean                          | ❌        | false                | Determines whether processed release should be automatically finalized after artifacts upload |
-| silent     | boolean                          | ❌        | false                | If true, all sentry-cli logs are suppressed                  |
-| deploy     | SentryCliNewDeployOptions        |          |                      | Sentry release deployment settings, see details below        |
-| sourceMaps | SentryCliUploadSourceMapsOptions |          |                      | Sourcemaps settings, see details below                       |
-| setCommits | SentryCliCommitsOptions          |          |                      | Adds commits to sentry, see details below                    |
+| Option               | Type                             | Required | Default value        | Description                                                  |
+| -------------------- | -------------------------------- | -------- | -------------------- | ------------------------------------------------------------ |
+| debug                | boolean                          | ❌        | false                | Show debug messages during run                               |
+| skipEnvironmentCheck | boolean                          | ❌        | false                | By default plugin will be enabled only for production builds. Set this option to `true` to skip environment checks |
+| dryRun               | boolean                          | ❌        | false                | Run sentry in dry mode - will only prints all steps          |
+| url                  | string                           | ❌        | 'https://sentry.io/' | The base URL of your Sentry instance.                        |
+| authToken            | string                           | ✅        | ''                   | The authentication token to use for all communication with Sentry. Can be obtained from https://sentry.io/settings/account/api/auth-tokens/. Required scopes: `project:releases` (and `org:read` if `setCommits` option is used). |
+| org                  | string                           | ✅        | ''                   | The slug of the Sentry organization associated with the app. |
+| project              | string                           | ✅        | ''                   | The slug of the Sentry project associated with the app.      |
+| vcsRemote            | string                           | ❌        | 'origin'             | The name of the remote in the version control system.        |
+| configFile           | string                           | ❌        | ''                   | Path to sentry cli config file, as described in https://docs.sentry.io/product/cli/configuration/#configuration-file. By default, the config file is looked for upwards from the current path, and defaults from `~/.sentryclirc` are always loaded |
+| release              | string                           | ❌        |                      | Unique name for release. Defaults to sentry-cli releases propose version (requires access to GIT and root directory to be repo) |
+| finalize             | boolean                          | ❌        | false                | Determines whether processed release should be automatically finalized after artifacts upload |
+| silent               | boolean                          | ❌        | false                | If true, all sentry-cli logs are suppressed                  |
+| deploy               | SentryCliNewDeployOptions        |          |                      | Sentry release deployment settings, see details below        |
+| sourceMaps           | SentryCliUploadSourceMapsOptions |          |                      | Sourcemaps settings, see details below                       |
+| setCommits           | SentryCliCommitsOptions          |          |                      | Adds commits to sentry, see details below                    |
 
 #### deploy settings
 
