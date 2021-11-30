@@ -1,16 +1,20 @@
 import type { Plugin } from 'vite'
 import type { ViteSentryPluginOptions } from '..'
 
-import { createLogger } from 'vite'
 import { createSentryCli } from './lib/create-cli'
 import { getReleasePromise } from './lib/get-release-promise'
 
 export default function ViteSentry (options: ViteSentryPluginOptions) {
-  const cli = createSentryCli(options)
-  const logger = createLogger()
+  const { skipEnvironmentCheck = false } = options
 
-  // is plugin enabled
-  let enabled: Boolean = false
+  const cli = createSentryCli(options)
+
+  // plugin state
+  let pluginState = {
+    enabled: false,
+    sourcemapsCreated: false,
+    isProduction: false
+  }
 
   const viteSentryPlugin: Plugin = {
     name: 'sentry',
@@ -23,17 +27,11 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
       also we dont't want to enable with disabled sourcemaps
     */
     configResolved (config) {
-      if (config.isProduction && config.build.sourcemap) {
-        enabled = true
-      }
-      else if (!config.isProduction) {
-        logger.error('[vite-plugin-sentry] skipped for non production build!')
-      }
-      else if (!config.build.sourcemap) {
-        logger.error(
-          '[vite-plugin-sentry] ViteSentry skipped because [options.sourcemap] is not enabled!'
-        )
-      }
+      pluginState.sourcemapsCreated = !!config.build.sourcemap
+      pluginState.isProduction = config.isProduction
+      pluginState.enabled =
+        pluginState.sourcemapsCreated &&
+        (skipEnvironmentCheck || config.isProduction)
     },
 
     /*
@@ -41,53 +39,65 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
       so sourcemaps must be ready
     */
     async closeBundle () {
-      if (enabled) {
+      const { enabled, sourcemapsCreated, isProduction } = pluginState
+
+      if (!enabled) {
+        if (!isProduction) {
+          this.warn(
+            'Skipped because running non-production build. If you want to run it anyway set skipEnvironmentCheck option value to true'
+          )
+        }
+        else if (!sourcemapsCreated) {
+          this.warn(
+            'Skipped because vite is not configured to provide sourcemaps. Please check configuration setting [options.sourcemap]!'
+          )
+        }
+      }
+      else {
+        if (skipEnvironmentCheck) {
+          this.warn('Running in non-production mode!')
+        }
+
         const currentRelease = await getReleasePromise(cli, options)
 
         if (!currentRelease) {
-          logger.error(
-            '[vite-plugin-sentry] Release returned from sentry is empty! Please check your configs'
+          this.warn(
+            'Release returned from sentry is empty! Please check your config'
           )
         }
         else {
-          cli.releases
-            .new(currentRelease)
-            .then(() => {
-              return cli.releases.uploadSourceMaps(
-                currentRelease,
-                options.sourceMaps
-              )
-            })
-            .then(() => {
-              const { commit, repo, auto } = options.setCommits
+          try {
+            // create release
+            await cli.releases.new(currentRelease)
 
-              if (auto || (repo && commit)) {
-                return cli.releases.setCommits(
-                  currentRelease,
-                  options.setCommits
-                )
-              }
+            // upload source maps
+            await cli.releases.uploadSourceMaps(
+              currentRelease,
+              options.sourceMaps
+            )
 
-              return undefined
-            })
-            .then(() => {
-              if (options.finalize) {
-                return cli.releases.finalize(currentRelease)
-              }
-              return undefined
-            })
-            .then(() => {
-              const { env } = options.deploy || {}
+            // set commits
+            const { commit, repo, auto } = options.setCommits
 
-              if (env) {
-                return cli.releases.newDeploy(currentRelease, options.deploy)
-              }
+            if (auto || (repo && commit)) {
+              await cli.releases.setCommits(currentRelease, options.setCommits)
+            }
 
-              return undefined
-            })
-            .catch((error: Error) => {
-              logger.error(`[vite-plugin-sentry] Error: ${error.message}`)
-            })
+            // finalize release
+            if (options.finalize) {
+              await cli.releases.finalize(currentRelease)
+            }
+
+            // set deploy options
+            if (options.deploy && options.deploy.env) {
+              await cli.releases.newDeploy(currentRelease, options.deploy)
+            }
+          }
+          catch (error) {
+            this.warn(
+              `Error while uploading sourcemaps to Sentry: ${error.message}`
+            )
+          }
         }
       }
     }

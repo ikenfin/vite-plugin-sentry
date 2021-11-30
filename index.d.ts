@@ -21,6 +21,11 @@ export interface ViteSentryPluginOptions {
   debug?: boolean
 
   /*
+    Force enable sourcemaps uploading
+  */
+  skipEnvironmentCheck?: boolean
+
+  /*
     Dry run mode
   */
   dryRun?: boolean
