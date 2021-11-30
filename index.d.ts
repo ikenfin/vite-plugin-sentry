@@ -38,7 +38,7 @@ export interface ViteSentryPluginOptions {
   authToken: string
 
   /*
-    Organisation slut
+    Organization slug
   */
   org: string
 
@@ -84,7 +84,7 @@ export interface ViteSentryPluginOptions {
   sourceMaps: SentryCliUploadSourceMapsOptions
 
   /*
-    Commits seettings
+    Commits settings
   */
   setCommits: SentryCliCommitsOptions
 }
