@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-sentry",
   "description": "The unofficial Sentry plugin for Vite ⚡️",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "author": "ikenfin",
   "license": "MIT",
   "main": "dist/index.js",
