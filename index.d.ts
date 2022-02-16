@@ -31,6 +31,11 @@ export interface ViteSentryPluginOptions {
   dryRun?: boolean
 
   /*
+    Remove all artifacts in the release befire upload
+  */
+  cleanArtifacts?: boolean
+
+  /*
     Url of sentry installation
   */
   url?: string

@@ -70,6 +70,13 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
             // create release
             await cli.releases.new(currentRelease)
 
+            if (options.cleanArtifacts) {
+              await cli.releases.execute(
+                [ 'releases', 'files', currentRelease, 'delete', '--all' ],
+                true
+              )
+            }
+
             // upload source maps
             await cli.releases.uploadSourceMaps(
               currentRelease,
