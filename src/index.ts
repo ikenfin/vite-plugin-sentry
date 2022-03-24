@@ -84,10 +84,15 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
             )
 
             // set commits
-            const { commit, repo, auto } = options.setCommits
+            if (options.setCommits) {
+              const { commit, repo, auto } = options.setCommits
 
-            if (auto || (repo && commit)) {
-              await cli.releases.setCommits(currentRelease, options.setCommits)
+              if (auto || (repo && commit)) {
+                await cli.releases.setCommits(
+                  currentRelease,
+                  options.setCommits
+                )
+              }
             }
 
             // finalize release

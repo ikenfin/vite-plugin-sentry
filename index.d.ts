@@ -84,7 +84,7 @@ export interface ViteSentryPluginOptions {
   /*
     Deployment settings
   */
-  deploy: SentryCliNewDeployOptions
+  deploy?: SentryCliNewDeployOptions
 
   /*
     Source maps settings
@@ -94,7 +94,7 @@ export interface ViteSentryPluginOptions {
   /*
     Commits settings
   */
-  setCommits: SentryCliCommitsOptions
+  setCommits?: SentryCliCommitsOptions
 }
 
 /*
