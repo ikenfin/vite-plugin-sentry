@@ -43,17 +43,17 @@ export interface ViteSentryPluginOptions {
   /*
     Authentication token for API
   */
-  authToken: string
+  authToken?: string
 
   /*
     Organization slug
   */
-  org: string
+  org?: string
 
   /*
     Project slug
   */
-  project: string
+  project?: string
 
   /*
     VCS remote name
