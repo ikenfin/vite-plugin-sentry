@@ -10,11 +10,15 @@ It's a port of official [Sentry webpack plugin](https://github.com/getsentry/sen
 
 It's fully written on Typescript and there is some differences in configuration, described below.
 
+
+
 ## Install
 
 ```sh
 yarn add vite-plugin-sentry
 ```
+
+
 
 ## Configuration
 
@@ -56,6 +60,36 @@ export default defineConfig({
 })
 ```
 
+
+
+## Common how to:
+
+#### Delete generated source maps after upload (#1)
+
+There are no built-in options to clean sourcemaps.
+
+While i recommend to use CI, you can also use tools like rimraf in your npm scripts to drop any unnecessary files after build was complete:
+
+```
+// package.json
+{
+  "scripts": {
+    // delete all js map files when built
+    "build": "vite build && rimraf dist/**/*.js.map"
+  }
+}
+```
+
+
+
+#### Cannot install on Windows
+
+This plugin relies on sentry-cli tool, which requires VCRedist to be installed. Please check #8 for details.
+
+
+
+## List of available options
+
 Here are the list of all plugin options:
 
 | Option               | Type                             | Required | Default value        | Description                                                  |
@@ -72,9 +106,9 @@ Here are the list of all plugin options:
 | release              | string                           | ❌        |                      | Unique name for release. Defaults to sentry-cli releases propose version (requires access to GIT and root directory to be repo) |
 | finalize             | boolean                          | ❌        | false                | Determines whether processed release should be automatically finalized after artifacts upload |
 | silent               | boolean                          | ❌        | false                | If true, all sentry-cli logs are suppressed                  |
-| deploy               | SentryCliNewDeployOptions        |          |                      | Sentry release deployment settings, see details below        |
-| sourceMaps           | SentryCliUploadSourceMapsOptions |          |                      | Sourcemaps settings, see details below                       |
-| setCommits           | SentryCliCommitsOptions          |          |                      | Adds commits to sentry, see details below                    |
+| deploy               | SentryCliNewDeployOptions        | ❌        |                      | Sentry release deployment settings, see details below        |
+| sourceMaps           | SentryCliUploadSourceMapsOptions | ✅        |                      | Sourcemaps settings, see details below                       |
+| setCommits           | SentryCliCommitsOptions          | ❌        |                      | Adds commits to sentry, see details below                    |
 
 #### deploy settings
 
