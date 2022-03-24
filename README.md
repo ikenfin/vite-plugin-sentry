@@ -70,7 +70,7 @@ There are no built-in options to clean sourcemaps.
 
 While i recommend to use CI, you can also use tools like rimraf in your npm scripts to drop any unnecessary files after build was complete:
 
-```
+```json
 // package.json
 {
   "scripts": {
@@ -92,15 +92,25 @@ This plugin relies on sentry-cli tool, which requires VCRedist to be installed. 
 
 Here are the list of all plugin options:
 
+**Legend:**
+
+❌ - NOT required
+
+⚠️ - NOT required in plugin config, but MUST be set (for example, using [.sentryclirc](https://docs.sentry.io/product/cli/configuration/#configuration-file) file)
+
+✅ - Required
+
+
+
 | Option               | Type                             | Required | Default value        | Description                                                  |
 | -------------------- | -------------------------------- | -------- | -------------------- | ------------------------------------------------------------ |
 | debug                | boolean                          | ❌        | false                | Show debug messages during run                               |
 | skipEnvironmentCheck | boolean                          | ❌        | false                | By default plugin will be enabled only for production builds. Set this option to `true` to skip environment checks |
 | dryRun               | boolean                          | ❌        | false                | Run sentry in dry mode - will only prints all steps          |
 | url                  | string                           | ❌        | 'https://sentry.io/' | The base URL of your Sentry instance.                        |
-| authToken            | string                           | ✅        | ''                   | The authentication token to use for all communication with Sentry. Can be obtained from https://sentry.io/settings/account/api/auth-tokens/. Required scopes: `project:releases` (and `org:read` if `setCommits` option is used). |
-| org                  | string                           | ✅        | ''                   | The slug of the Sentry organization associated with the app. |
-| project              | string                           | ✅        | ''                   | The slug of the Sentry project associated with the app.      |
+| authToken            | string                           | ⚠️        | ''                   | The authentication token to use for all communication with Sentry. Can be obtained from https://sentry.io/settings/account/api/auth-tokens/. Required scopes: `project:releases` (and `org:read` if `setCommits` option is used). |
+| org                  | string                           | ⚠️        | ''                   | The slug of the Sentry organization associated with the app. |
+| project              | string                           | ⚠️        | ''                   | The slug of the Sentry project associated with the app.      |
 | vcsRemote            | string                           | ❌        | 'origin'             | The name of the remote in the version control system.        |
 | configFile           | string                           | ❌        | ''                   | Path to sentry cli config file, as described in https://docs.sentry.io/product/cli/configuration/#configuration-file. By default, the config file is looked for upwards from the current path, and defaults from `~/.sentryclirc` are always loaded |
 | release              | string                           | ❌        |                      | Unique name for release. Defaults to sentry-cli releases propose version (requires access to GIT and root directory to be repo) |
