@@ -45,7 +45,7 @@
     "typescript": "4.6.2"
   },
   "dependencies": {
-    "@sentry/cli": "1.74.2"
+    "@sentry/cli": "2.1.0"
   },
   "peerDependencies": {
     "vite": "^2.8.6"
