@@ -33,22 +33,22 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "21.0.2",
     "@rollup/plugin-eslint": "^8.0.1",
-    "@types/node": "17.0.35",
-    "@typescript-eslint/eslint-plugin": "5.26.0",
-    "@typescript-eslint/parser": "5.26.0",
-    "eslint": "8.16.0",
-    "jest": "27.5.1",
+    "@types/node": "17.0.42",
+    "@typescript-eslint/eslint-plugin": "5.27.1",
+    "@typescript-eslint/parser": "5.27.1",
+    "eslint": "8.17.0",
+    "jest": "28.1.1",
     "prettier": "2.6.2",
-    "rollup": "2.75.0",
+    "rollup": "2.75.6",
     "rollup-plugin-auto-external": "^2.0.0",
-    "rollup-plugin-typescript2": "0.31.2",
-    "typescript": "4.7.2"
+    "rollup-plugin-typescript2": "0.32.1",
+    "typescript": "4.7.3"
   },
   "dependencies": {
     "@sentry/cli": "2.1.0"
   },
   "peerDependencies": {
-    "vite": "^2.9.9"
+    "vite": "^2.9.12"
   },
   "engines": {
     "node": ">= 12"
