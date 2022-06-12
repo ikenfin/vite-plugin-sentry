@@ -15,7 +15,7 @@ It's fully written on Typescript and there is some differences in configuration,
 ## Install
 
 ```sh
-yarn add vite-plugin-sentry
+yarn add -D vite-plugin-sentry
 ```
 
 
@@ -36,7 +36,7 @@ import viteSentry from 'vite-plugin-sentry'
 	Configure sentry plugin
 */
 const sentryConfig: ViteSentryPluginOptions = {
-  url: 'https://my.ondemand.sentry.com',
+  url: 'https://sentry.io',
   authToken: '<SECRET_TOKEN_HERE>',
   org: 'my_org',
   project: 'my_project',
@@ -56,7 +56,10 @@ const sentryConfig: ViteSentryPluginOptions = {
 
 export default defineConfig({
   // other options
-  plugins: [ viteSentry(sentryConfig) ]
+  plugins: [ viteSentry(sentryConfig) ],
+  build: {
+        sourcemap: true,
+    },
 })
 ```
 
