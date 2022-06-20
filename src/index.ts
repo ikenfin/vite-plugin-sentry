@@ -4,10 +4,14 @@ import type { ViteSentryPluginOptions } from '..'
 import { createSentryCli } from './lib/create-cli'
 import { getReleasePromise } from './lib/get-release-promise'
 
+const MODULE_ID = 'virtual:vite-plugin-sentry/sentry-release'
+const RESOLVED_ID = '\0' + MODULE_ID
+
 export default function ViteSentry (options: ViteSentryPluginOptions) {
   const { skipEnvironmentCheck = false } = options
 
   const cli = createSentryCli(options)
+  const currentReleasePromise = getReleasePromise(cli, options)
 
   // plugin state
   let pluginState = {
@@ -22,6 +26,19 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
     apply: 'build',
 
     /*
+      define SENTRY_RELEASE to `import.meta.env.SENTRY_RELEASE`
+    */
+    async config () {
+      const currentRelease = await currentReleasePromise
+
+      return {
+        define: {
+          'import.meta.env.SENTRY_RELEASE': JSON.stringify({id: currentRelease}) 
+        }
+      }
+    },
+
+    /*
       Check incoming config and decise - enable plugin or not
       We don't want enable plugin for non-production environments
       also we dont't want to enable with disabled sourcemaps
@@ -32,6 +49,24 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
       pluginState.enabled =
         pluginState.sourcemapsCreated &&
         (skipEnvironmentCheck || config.isProduction)
+    },
+
+    /*
+      Resolve id for virtual module
+    */
+    resolveId (id) {
+      if (id === MODULE_ID) {
+        return RESOLVED_ID
+      }
+    },
+
+    /*
+      Provide virtual module
+    */
+    load (id) {
+      if (id === RESOLVED_ID) {
+        return `globalThis.SENTRY_RELEASE = import.meta.env.SENTRY_RELEASE\n`
+      }
     },
 
     /*
@@ -58,7 +93,7 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
           this.warn('Running in non-production mode!')
         }
 
-        const currentRelease = await getReleasePromise(cli, options)
+        const currentRelease = await currentReleasePromise
 
         if (!currentRelease) {
           this.warn(
