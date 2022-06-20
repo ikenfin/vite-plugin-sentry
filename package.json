@@ -13,6 +13,7 @@
   },
   "files": [
     "index.d.ts",
+    "client.d.ts",
     "types/*",
     "dist/*"
   ],

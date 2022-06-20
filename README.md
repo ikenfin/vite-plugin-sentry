@@ -63,6 +63,32 @@ export default defineConfig({
 })
 ```
 
+## Usage
+To correctly work with Sentry, you need to add a release id to your project. You can do it with one of the following methods:
+
+### Import the virtual module
+You can import the virtual module into your app entry point to inject the release id to global.
+```ts
+import 'virtual:vite-plugin-sentry/sentry-release'
+```
+
+### Get the release id from `import.meta.env.SENTRY_RELEASE`
+Add release id to your `Sentry.init`
+```ts
+Sentry.init({
+  release: import.meta.env.SENTRY_RELEASE.id,
+})
+```
+
+## TypeScript
+To get type information for the virtual module or import meta env, you can add `vite-plugin-sentry/client` to your `types` array in tsconfig.json.
+```json
+{
+  "types": [
+    "vite-plugin-sentry/client"
+  ]
+}
+```
 
 
 ## Common how to:
