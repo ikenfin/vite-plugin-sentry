@@ -64,7 +64,7 @@ export default defineConfig({
 ```
 
 ## Usage
-To correctly work with Sentry, you need to add a release id to your project. You can do it with one of the following commands:
+To correctly work with Sentry, you need to add a release id to your project. You can do it with one of the following methods:
 
 ### Import the virtual module
 You can import the virtual module into your app entry point to inject the release id to global.
