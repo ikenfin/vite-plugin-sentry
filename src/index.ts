@@ -23,7 +23,10 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
   const viteSentryPlugin: Plugin = {
     name: 'sentry',
     enforce: 'post',
-    apply: 'build',
+    apply (config, { command }) {
+      // apply only on build but not for SSR
+      return command === 'build' && !config.build.ssr
+    },
 
     /*
       define SENTRY_RELEASE to `import.meta.env.SENTRY_RELEASE`
