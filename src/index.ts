@@ -25,7 +25,7 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
     enforce: 'post',
     apply (config, { command }) {
       // apply only on build but not for SSR
-      return command === 'build' && !config.build.ssr
+      return command === 'build' && !config.build?.ssr
     },
 
     /*
