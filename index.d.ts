@@ -10,6 +10,14 @@ import type {
   SentryCliNewDeployOptions
 } from '@sentry/cli'
 
+export interface ViteSentryPluginOptionsSourceMapsOptions extends SentryCliUploadSourceMapsOptions {
+
+  /*
+    Unique identifier for distribution
+  */
+  dist?: string
+}
+
 /*
     Plugin input options
 */
@@ -89,7 +97,7 @@ export interface ViteSentryPluginOptions {
   /*
     Source maps settings
   */
-  sourceMaps: SentryCliUploadSourceMapsOptions
+  sourceMaps: ViteSentryPluginOptionsSourceMapsOptions
 
   /*
     Commits settings
