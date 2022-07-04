@@ -169,6 +169,7 @@ With `sourceMaps` you can configure how sourcemaps will be processed
 | Option             | Type               | Required | Description                                                  |
 | ------------------ | ------------------ | -------- | ------------------------------------------------------------ |
 | include            | string \| string[] | ✅        | One or more paths that Sentry CLI should scan recursively for sources. It will upload all `.map` files and match associated `.js` files. |
+| dist               | string             | ❌        | Unique identifier for the distribution, used to further segment your release. Usually your build number |
 | ignore             | string[]           | ❌        | Paths to ignore during upload. Overrides entries in `ignoreFile` file. If neither `ignoreFile` nor `ignore` is present, defaults to `['node_modules']`. |
 | ignoreFile         | string             | ❌        | Path to a file containing list of files/directories to ignore. Can point to `.gitignore` or anything with the same format. |
 | rewrite            | boolean            | ❌        | Enables rewriting of matching source maps so that indexed maps are flattened and missing sources are inlined if possible. Defaults to `true` |
@@ -193,7 +194,9 @@ With `setCommits` you can configure
 
 ## Tests
 
-There are no tests at the moment, because i'm not sure how to test it 😔 If you have ideas - please, make issue or PR. 👍
+At the moment we got unit tests for plugin functions. You can run them by running `yarn test`
+
+Also there will appear e2e tests soon.
 
 ## Author
 

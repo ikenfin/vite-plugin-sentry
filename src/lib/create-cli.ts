@@ -1,4 +1,4 @@
-import type { ViteSentryPluginOptions } from '../..'
+import type { ViteSentryCliOptions } from '../..'
 
 import SentryCli from '@sentry/cli'
 import { createFakeCli } from './create-fake-cli'
@@ -7,14 +7,11 @@ import { createFakeCli } from './create-fake-cli'
   Initialize and return SentryCli instance
   On dryRun enabled - returns fake sentryCli
 */
-export const createSentryCli = (options: ViteSentryPluginOptions) => {
-  const defaults = {
-    debug: false,
-    finalize: true,
-    rewrite: true
-  }
 
-  const sentryOptions = Object.assign({}, defaults, options)
+export const createSentryCli = (options: ViteSentryCliOptions) => {
+  const sentryOptions = Object.assign({
+    silent: false
+  }, options)
 
   /*
     Initialize sentry cli
@@ -23,7 +20,7 @@ export const createSentryCli = (options: ViteSentryPluginOptions) => {
     authToken: sentryOptions.authToken,
     org: sentryOptions.org,
     project: sentryOptions.project,
-    silent: sentryOptions.silent ?? false,
+    silent: sentryOptions.silent,
     url: sentryOptions.url,
     vcsRemote: sentryOptions.vcsRemote
   })
