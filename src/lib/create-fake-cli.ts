@@ -40,6 +40,7 @@ export const createFakeCli = (cli: SentryCli, debug = debugLogger) => {
       throw new Error('Function not implemented.')
     }
   }
+
   const DummySentryCli: SentryCli = {
     releases,
     execute: function (args: string[], live: boolean): Promise<string> {

@@ -1,4 +1,4 @@
-import type { ViteSentryPluginOptions } from '../..'
+import type { ViteSentryCliReleaseOptions } from '../..'
 
 import SentryCli from '@sentry/cli'
 
@@ -7,7 +7,7 @@ import SentryCli from '@sentry/cli'
 */
 export const getReleasePromise = (
   cli: SentryCli,
-  options: ViteSentryPluginOptions
+  options: ViteSentryCliReleaseOptions = {}
 ) => {
   return (options.release
     ? Promise.resolve(options.release)
