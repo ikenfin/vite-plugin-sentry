@@ -24,8 +24,13 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
     name: 'sentry',
     enforce: 'post',
     apply (config, { command }) {
-      // apply only on build but not for SSR
-      return command === 'build' && !config.build?.ssr
+      // disable plugin in SSR mode
+      // TODO: maybe there is better solution to upload generated SSR artifacts too
+      if (config.build?.ssr) {
+        return false
+      }
+
+      return true
     },
 
     /*
