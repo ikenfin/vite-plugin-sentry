@@ -1,8 +1,6 @@
 # Plugin to integrate Vite ⚡️ with Sentry
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
-[![Twitter: realtominoff](https://img.shields.io/twitter/follow/realtominoff.svg?style=social)](https://twitter.com/realtominoff)
+![Version](https://img.shields.io/npm/v/vite-plugin-sentry)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
 
 > Vite plugin acts as interface to SentryCLI
 
@@ -203,7 +201,6 @@ Also there will appear e2e tests soon.
 👤 **ikenfin**
 
 * Website: https://ikfi.ru
-* Twitter: [@realtominoff](https://twitter.com/realtominoff)
 
 ## Show your support
 
