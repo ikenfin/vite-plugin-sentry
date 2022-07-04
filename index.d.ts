@@ -18,30 +18,17 @@ export interface ViteSentryPluginOptionsSourceMapsOptions extends SentryCliUploa
   dist?: string
 }
 
-/*
-    Plugin input options
-*/
-export interface ViteSentryPluginOptions {
+export interface ViteSentryCliOptions {
 
   /*
-    Show debug messages during run
+    Path to sentry cli config file
   */
-  debug?: boolean
-
-  /*
-    Force enable sourcemaps uploading
-  */
-  skipEnvironmentCheck?: boolean
+  configFile?: string
 
   /*
     Dry run mode
   */
   dryRun?: boolean
-
-  /*
-    Remove all artifacts in the release befire upload
-  */
-  cleanArtifacts?: boolean
 
   /*
     Url of sentry installation
@@ -69,25 +56,44 @@ export interface ViteSentryPluginOptions {
   vcsRemote?: string
 
   /*
-    Path to sentry cli config file
+    If true, all sentry-cli logs are suppressed
   */
-  configFile?: string
+  silent?: boolean
+}
+
+export interface ViteSentryCliReleaseOptions {
 
   /*
     Unique name for release
     defaults to sentry-cli releases propose version (requires access to GIT and root directory to be repo)
   */
   release?: string
+}
+
+/*
+    Plugin input options
+*/
+export interface ViteSentryPluginOptions extends ViteSentryCliOptions, ViteSentryCliReleaseOptions  {
+
+  /*
+    Show debug messages during run
+  */
+  debug?: boolean
+
+  /*
+    Force enable sourcemaps uploading
+  */
+  skipEnvironmentCheck?: boolean
+
+  /*
+    Remove all artifacts in the release befire upload
+  */
+  cleanArtifacts?: boolean
 
   /*
     Determines whether processed release should be automatically finalized after artifacts upload
   */
   finalize?: boolean
-
-  /*
-    If true, all sentry-cli logs are suppressed
-  */
-  silent?: boolean
 
   /*
     Deployment settings
