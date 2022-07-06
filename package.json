@@ -29,7 +29,7 @@
     "test": "jest ./src/*/**.test.ts",
     "test:coverage": "jest --coverage ./src/*/**.test.ts",
     "lint": "eslint ./src/**/*.ts",
-    "lint:tests": "eslint ./test",
+    "lint:tests": "eslint ./src/**/*.test.ts",
     "prepare": "husky install"
   },
   "devDependencies": {
