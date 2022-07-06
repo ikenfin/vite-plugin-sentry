@@ -20,6 +20,7 @@ jobs:
       - run: yarn lint # lint the code
       - run: yarn test # bundle provided by pretest script
 
+  # publish to npm
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
@@ -30,8 +31,31 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org
           cache: 'yarn'
+      - run: yarn install --frozen-lockfile
       - run: yarn bundle
       - run: yarn publish --non-interactive --no-git-tag-version
         env:
           CI: true
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+  # publish to github packages
+  publish-gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://npm.pkg.github.com/
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - run: yarn bundle
+      - run: yarn publish --non-interactive --no-git-tag-version
+        env:
+          CI: true
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
