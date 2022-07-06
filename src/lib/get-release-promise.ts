@@ -9,9 +9,10 @@ export const getReleasePromise = (
   cli: SentryCli,
   options: ViteSentryCliReleaseOptions = {}
 ) => {
-  return (options.release
-    ? Promise.resolve(options.release)
-    : cli.releases.proposeVersion()
+  return (
+    options.release
+      ? Promise.resolve(options.release)
+      : cli.releases.proposeVersion()
   )
     .then((version: string) => `${version}`.trim())
     .catch(() => undefined)

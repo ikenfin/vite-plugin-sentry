@@ -23,7 +23,6 @@ describe('Tests for getReleasePromise', () => {
     })
   })
 
-
   it('Call getReleasePromise without options uses proposed by sentry', () => {
     const { cli, version } = mockSentryCli()
     const releasePromise = getReleasePromise(cli as any)
@@ -56,7 +55,7 @@ describe('Tests for getReleasePromise', () => {
 
     const mockCli = {
       releases: {
-        proposeVersion:  () => Promise.reject(release)
+        proposeVersion: () => Promise.reject(release)
       }
     }
 
