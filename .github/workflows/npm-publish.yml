@@ -19,7 +19,6 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn lint # lint the code
       - run: yarn test # bundle provided by pretest script
-      - run: yarn bundle
 
   publish-npm:
     needs: build
@@ -31,6 +30,7 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org
           cache: 'yarn'
+      - run: yarn bundle
       - run: yarn publish --non-interactive --no-git-tag-version
         env:
           CI: true
