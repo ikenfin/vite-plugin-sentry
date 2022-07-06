@@ -30,7 +30,7 @@
     "test:coverage": "jest --coverage ./src/*/**.test.ts",
     "lint": "eslint ./src/**/*.ts",
     "lint:tests": "eslint ./src/**/*.test.ts",
-    "prepare": "husky install"
+    "prepare": "is-ci || husky install"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "21.0.2",
@@ -40,14 +40,15 @@
     "@typescript-eslint/eslint-plugin": "5.27.1",
     "@typescript-eslint/parser": "5.27.1",
     "eslint": "8.17.0",
+    "husky": "^8.0.0",
+    "is-ci": "^3.0.1",
     "jest": "28.1.1",
     "prettier": "2.6.2",
     "rollup": "2.75.6",
     "rollup-plugin-auto-external": "^2.0.0",
     "rollup-plugin-typescript2": "0.32.1",
     "ts-jest": "^28.0.5",
-    "typescript": "4.7.3",
-    "husky": "^8.0.0"
+    "typescript": "4.7.3"
   },
   "dependencies": {
     "@sentry/cli": "^2.2.0"
