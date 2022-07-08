@@ -97,7 +97,7 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
         }
       }
       else {
-        if (skipEnvironmentCheck) {
+        if (!isProduction && skipEnvironmentCheck) {
           this.warn('Running in non-production mode!')
         }
 
