@@ -10,13 +10,9 @@ import type {
   SentryCliNewDeployOptions
 } from '@sentry/cli'
 
-export interface ViteSentryPluginOptionsSourceMapsOptions extends SentryCliUploadSourceMapsOptions {
-
-  /*
-    Unique identifier for distribution
-  */
-  dist?: string
-}
+export interface ViteSentryPluginOptionsCommitsOptions extends SentryCliCommitsOptions {}
+export interface ViteSentryPluginOptionsSourceMapsOptions extends SentryCliUploadSourceMapsOptions {}
+export interface ViteSentryPluginOptionsNewDeployOptions extends SentryCliNewDeployOptions {}
 
 export interface ViteSentryCliOptions {
 
@@ -98,7 +94,7 @@ export interface ViteSentryPluginOptions extends ViteSentryCliOptions, ViteSentr
   /*
     Deployment settings
   */
-  deploy?: SentryCliNewDeployOptions
+  deploy?: ViteSentryPluginOptionsNewDeployOptions
 
   /*
     Source maps settings
@@ -108,7 +104,7 @@ export interface ViteSentryPluginOptions extends ViteSentryCliOptions, ViteSentr
   /*
     Commits settings
   */
-  setCommits?: SentryCliCommitsOptions
+  setCommits?: ViteSentryPluginOptionsCommitsOptions
 }
 
 /*
