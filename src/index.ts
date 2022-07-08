@@ -4,7 +4,13 @@ import type { ViteSentryPluginOptions } from '..'
 import { createSentryCli } from './lib/create-cli'
 import { getReleasePromise } from './lib/get-release-promise'
 
-const MODULE_ID = 'virtual:vite-plugin-sentry/sentry-release'
+/**
+ * @deprecated Will be removed in one of next versions
+ */
+const DEPRECATED_MODULE_ID = 'virtual:vite-plugin-sentry/sentry-release'
+const DEPRECATED_RESOLVED_ID = '\0' + DEPRECATED_MODULE_ID
+
+const MODULE_ID = 'virtual:vite-plugin-sentry/sentry-config'
 const RESOLVED_ID = '\0' + MODULE_ID
 
 export default function ViteSentry (options: ViteSentryPluginOptions) {
@@ -41,7 +47,17 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
 
       return {
         define: {
-          'import.meta.env.SENTRY_RELEASE': JSON.stringify({id: currentRelease}) 
+
+          /**
+           * @deprecated use VITE_PLUGIN_SENTRY_CONFIG instead
+           */
+          'import.meta.env.SENTRY_RELEASE': JSON.stringify({
+            id: currentRelease
+          }),
+          'import.meta.env.VITE_PLUGIN_SENTRY_CONFIG': JSON.stringify({
+            dist: options.sourceMaps.dist,
+            release: currentRelease
+          })
         }
       }
     },
@@ -63,6 +79,15 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
       Resolve id for virtual module
     */
     resolveId (id) {
+      if (id === DEPRECATED_MODULE_ID) {
+        this.warn(
+          '\n\nDEPRECATION NOTICE:\n\nSeems that you are using sentry-release virtual module.\n' +
+            "It's deprecated now and will be removed in next versions, please use virtual:vite-plugin-sentry/sentry-config instead" +
+            'New virtual module provide { dist, release } instead of just release string\n' +
+            'So instead of import.meta.env.SENTRY_RELEASE.id, you can use import.meta.env.VITE_PLUGIN_SENTRY_CONFIG.release'
+        )
+        return DEPRECATED_RESOLVED_ID
+      }
       if (id === MODULE_ID) {
         return RESOLVED_ID
       }
@@ -72,8 +97,15 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
       Provide virtual module
     */
     load (id) {
+
+      /**
+       * @deprecated Will be removed on one of next releases
+       */
+      if (id === DEPRECATED_RESOLVED_ID) {
+        return 'globalThis.SENTRY_RELEASE = import.meta.env.SENTRY_RELEASE\n'
+      }
       if (id === RESOLVED_ID) {
-        return `globalThis.SENTRY_RELEASE = import.meta.env.SENTRY_RELEASE\n`
+        return 'globalThis.VITE_PLUGIN_SENTRY_CONFIG = import.meta.env.VITE_PLUGIN_SENTRY_CONFIG\n'
       }
     },
 
