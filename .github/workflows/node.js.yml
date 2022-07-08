@@ -29,3 +29,11 @@ jobs:
     - run: yarn install --frozen-lockfile
     - run: yarn lint
     - run: yarn test
+
+    # upload coverage to codecov
+    - run: yarn test:coverage
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
