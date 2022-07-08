@@ -1,12 +1,12 @@
 # Plugin to integrate Vite ⚡️ with Sentry
 
-![Version](https://img.shields.io/npm/v/vite-plugin-sentry)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)
+![Version](https://img.shields.io/npm/v/vite-plugin-sentry)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)[![codecov](https://codecov.io/gh/ikenfin/vite-plugin-sentry/branch/master/graph/badge.svg?token=RAM0TAVIIQ)](https://codecov.io/gh/ikenfin/vite-plugin-sentry)
 
 > Vite plugin acts as interface to SentryCLI
 
 It's a port of official [Sentry webpack plugin](https://github.com/getsentry/sentry-webpack-plugin) for Vite.
 
-It's fully written on Typescript and there is some differences in configuration, described below.
+It's fully written on Typescript and there is some differences in configuration, described below, but we mostly follow @sentry/cli types.
 
 
 
@@ -61,21 +61,36 @@ export default defineConfig({
 })
 ```
 
-## Usage
-To correctly work with Sentry, you need to add a release id to your project. You can do it with one of the following methods:
 
-### Import the virtual module
-You can import the virtual module into your app entry point to inject the release id to global.
-```ts
-import 'virtual:vite-plugin-sentry/sentry-release'
-```
 
-### Get the release id from `import.meta.env.SENTRY_RELEASE`
-Add release id to your `Sentry.init`
-```ts
+## Share config with Sentry client library
+
+To correctly work with Sentry, you need to add a **release** to your project. Same about **dist** option: your uploaded sourcemaps and client sentry initialization must have same release/dist to make sentry correct recognize and bind sourcemaps to logged errors. 
+
+You can expose release and dist options used by vite-plugin-sentry into your application using Vite feature known as virtual module.
+
+To do so, you need to add several lines:
+
+```javascript
+// import virtual module
+// i would recommend doing it at entry point script (e.g. main.js)
+import 'virtual:vite-plugin-sentry/sentry-config'
+
+// now you can use this variable like so
+const dist = import.meta.env.VITE_PLUGIN_SENTRY_CONFIG.dist
+const release = import.meta.env.VITE_PLUGIN_SENTRY_CONFIG.release
+
+// then you use it in sentry init
 Sentry.init({
-  release: import.meta.env.SENTRY_RELEASE.id,
+  // other sentry options
+  dist: import.meta.env.VITE_PLUGIN_SENTRY_CONFIG.dist,
+  release: import.meta.env.VITE_PLUGIN_SENTRY_CONFIG.release
 })
+
+// also, these settings exposed to globalThis object
+// so you can get them from window object for example"
+const dist = window.VITE_PLUGIN_SENTRY_CONFIG.dist
+const release = window.VITE_PLUGIN_SENTRY_CONFIG.release
 ```
 
 ## TypeScript
@@ -87,6 +102,7 @@ To get type information for the virtual module or import meta env, you can add `
   ]
 }
 ```
+
 
 
 ## Common how to:
@@ -201,6 +217,7 @@ Also there will appear e2e tests soon.
 👤 **ikenfin**
 
 * Website: https://ikfi.ru
+* Github: [@ikenfin](https://github.com/ikenfin)
 
 ## Show your support
 
