@@ -6,7 +6,7 @@
 
 It's a port of official [Sentry webpack plugin](https://github.com/getsentry/sentry-webpack-plugin) for Vite.
 
-It's fully written on Typescript and there is some differences in configuration, described below, but we mostly follow @sentry/cli types.
+It's fully written on Typescript and there is some differences in configuration, described below, but we mostly follow [@sentry/cli](https://github.com/getsentry/sentry-cli) types.
 
 
 
@@ -56,8 +56,9 @@ export default defineConfig({
   // other options
   plugins: [ viteSentry(sentryConfig) ],
   build: {
-        sourcemap: true,
-    },
+    // required: tells vite to create source maps
+    sourcemap: true,
+  }
 })
 ```
 
@@ -95,7 +96,7 @@ const release = window.VITE_PLUGIN_SENTRY_CONFIG.release
 
 ## TypeScript
 To get type information for the virtual module or import meta env, you can add `vite-plugin-sentry/client` to your `types` array in tsconfig.json.
-```json
+```javascript
 {
   "types": [
     "vite-plugin-sentry/client"
@@ -113,7 +114,7 @@ There are no built-in options to clean sourcemaps.
 
 While i recommend to use CI, you can also use tools like rimraf in your npm scripts to drop any unnecessary files after build was complete:
 
-```json
+```javascript
 // package.json
 {
   "scripts": {
@@ -127,7 +128,7 @@ While i recommend to use CI, you can also use tools like rimraf in your npm scri
 
 #### Cannot install on Windows
 
-This plugin relies on sentry-cli tool, which requires VCRedist to be installed. Please check #8 for details.
+This plugin relies on @sentry/cli tool, which requires VCRedist to be installed. Please check #8 for details.
 
 
 
