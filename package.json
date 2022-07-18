@@ -54,7 +54,7 @@
     "@sentry/cli": "^2.3.1"
   },
   "peerDependencies": {
-    "vite": ">= 2.9.14"
+    "vite": "^2.9.14 || ^3.0.1"
   },
   "engines": {
     "node": ">= 12"
