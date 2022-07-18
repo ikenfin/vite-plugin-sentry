@@ -31,7 +31,7 @@ import type { ViteSentryPluginOptions } from 'vite-plugin-sentry'
 import viteSentry from 'vite-plugin-sentry'
 
 /*
-	Configure sentry plugin
+  Configure sentry plugin
 */
 const sentryConfig: ViteSentryPluginOptions = {
   url: 'https://sentry.io',
@@ -66,7 +66,7 @@ export default defineConfig({
 
 ## Share config with Sentry client library
 
-To correctly work with Sentry, you need to add a **release** to your project. Same about **dist** option: your uploaded sourcemaps and client sentry initialization must have same release/dist to make sentry correct recognize and bind sourcemaps to logged errors. 
+To correctly work with Sentry, you need to add a **release** to your project. Same about **dist** option: your uploaded sourcemaps and client sentry initialization must have same release/dist to make sentry correct recognize and bind sourcemaps to logged errors.
 
 You can expose release and dist options used by vite-plugin-sentry into your application using Vite feature known as virtual module.
 
