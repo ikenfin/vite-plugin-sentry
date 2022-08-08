@@ -32,7 +32,10 @@ jobs:
           registry-url: https://registry.npmjs.org
           cache: 'yarn'
       - run: yarn install --frozen-lockfile
-      - run: yarn add --peer --frozen-lockfile vite
+      # We need to use npm here because yarn does not support any no-save options
+      # and we need to keep our conditional versions in resulting package
+      - run: npm install --no-package-lock --strict-peer-deps --no-save vite
+      # - run: yarn add --peer --frozen-lockfile vite
       - run: yarn bundle
       - run: yarn publish --non-interactive --no-git-tag-version
         env:
