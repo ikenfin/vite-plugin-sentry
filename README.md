@@ -81,15 +81,15 @@ import 'virtual:vite-plugin-sentry/sentry-config'
 const dist = import.meta.env.VITE_PLUGIN_SENTRY_CONFIG.dist
 const release = import.meta.env.VITE_PLUGIN_SENTRY_CONFIG.release
 
-// then you use it in sentry init
+// use it in sentry init
 Sentry.init({
   // other sentry options
-  dist: import.meta.env.VITE_PLUGIN_SENTRY_CONFIG.dist,
-  release: import.meta.env.VITE_PLUGIN_SENTRY_CONFIG.release
+  dist,
+  release
 })
 
 // also, these settings exposed to globalThis object
-// so you can get them from window object for example"
+// so you can get them from window object:
 const dist = window.VITE_PLUGIN_SENTRY_CONFIG.dist
 const release = window.VITE_PLUGIN_SENTRY_CONFIG.release
 ```
@@ -219,6 +219,10 @@ Also there will appear e2e tests soon.
 
 * Website: https://ikfi.ru
 * Github: [@ikenfin](https://github.com/ikenfin)
+
+## Thanks
+
+Thank you to all contributors and users of this plugin. Knowing that so many people found this plugin helpful is really motivating me!
 
 ## Show your support
 
