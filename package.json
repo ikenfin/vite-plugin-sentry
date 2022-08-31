@@ -39,7 +39,7 @@
     "@types/node": "^18.0.1",
     "@typescript-eslint/eslint-plugin": "5.36.0",
     "@typescript-eslint/parser": "5.36.0",
-    "eslint": "8.22.0",
+    "eslint": "8.23.0",
     "husky": "^8.0.0",
     "is-ci": "^3.0.1",
     "jest": "28.1.3",
