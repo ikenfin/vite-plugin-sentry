@@ -128,7 +128,7 @@ While i recommend to use CI, you can also use tools like rimraf in your npm scri
 
 #### Cannot install on Windows
 
-This plugin relies on @sentry/cli tool, which requires VCRedist to be installed. Please check #8 for details.
+This plugin relies on @sentry/cli tool, which requires VCRedist to be installed. Please check [#8](https://github.com/ikenfin/vite-plugin-sentry/issues/8) for details.
 
 
 
