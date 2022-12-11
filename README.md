@@ -62,6 +62,9 @@ export default defineConfig({
 })
 ```
 
+## Wiki
+
+Check project [wiki on github](https://github.com/ikenfin/vite-plugin-sentry/wiki) to get more information.
 
 
 ## Share config with Sentry client library
@@ -96,12 +99,19 @@ const release = window.VITE_PLUGIN_SENTRY_CONFIG.release
 
 ## TypeScript
 To get type information for the virtual module or import meta env, you can add `vite-plugin-sentry/client` to your `types` array in tsconfig.json.
+
 ```javascript
 {
   "types": [
     "vite-plugin-sentry/client"
   ]
 }
+```
+
+Also you can use `reference` in your typescript code like below:
+
+```javascript
+///<reference types="vite-plugin-sentry/client"/>
 ```
 
 
