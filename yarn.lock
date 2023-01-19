@@ -607,9 +607,9 @@
     magic-string "^0.26.4"
 
 "@rollup/plugin-eslint@^9.0.0":
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-eslint/-/plugin-eslint-9.0.1.tgz#7ee86e566c780840e5ce3708446801becfaea9cb"
-  integrity sha512-6arHaZt+0pH8dgsxqT4KLW7BvJ0NThJRJtf56A7HKgBynLfcWJwiUvdb+TMowQdZgxRIvTnBV1VIER/FBrDFDw==
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-eslint/-/plugin-eslint-9.0.2.tgz#0b0e8fbf4a6b17c6c40968024070c2d396673f2f"
+  integrity sha512-dawPJxm7I1hupxoNPIul8Xpq/Q8MhKnmICdmpQvjFakplrteoOeNLlQNSjNHoRBrn0uW6a+rJR51mOU1VJ+upg==
   dependencies:
     "@rollup/pluginutils" "^5.0.1"
     eslint "^8.24.0"
