@@ -632,9 +632,9 @@
     picomatch "^2.3.1"
 
 "@sentry/cli@^2.3.1":
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/@sentry/cli/-/cli-2.10.0.tgz#ff89ae60724742dfafab93006ec2056cc2d74e9b"
-  integrity sha512-VQnGXPQCqJyxirmUWkNznq3YYklDwDfbogok3lPHaL3r0bhgcNwt/bZxeycpaqk5I7myKNUYW8RG+F1YERODSw==
+  version "2.15.2"
+  resolved "https://registry.yarnpkg.com/@sentry/cli/-/cli-2.15.2.tgz#78a876c7344d3a698bb6052ea4f3751cfeab29b1"
+  integrity sha512-jt8RvbHX09eLj2GY2ufytU/n1sWbUh7/EzBE4Ut92kPCLyo+D56VwR641HBrthZluWpGO/w2ujFMNpkk99UPfA==
   dependencies:
     https-proxy-agent "^5.0.0"
     node-fetch "^2.6.7"
