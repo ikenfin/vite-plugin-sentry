@@ -1,13 +1,19 @@
 // rollup.config.js
-import pkg from './package.json'
-// import babel from '@rollup/plugin-babel'
+import { createRequire } from 'node:module'
+
 import commonjs from '@rollup/plugin-commonjs'
 import eslint from '@rollup/plugin-eslint'
-import autoExternal from 'rollup-plugin-auto-external'
-import rollupTypescript from 'rollup-plugin-typescript2'
+import typescript from '@rollup/plugin-typescript'
 
+const require = createRequire(import.meta.url)
+const pkg = require('./package.json')
+
+/**
+ * @type { import('rollup').RollupOptions }
+ */
 export default {
   input: 'src/index.ts',
+  external: [ 'util', 'vite', '@sentry/cli' ],
   output: [
     {
       format: 'es',
@@ -22,13 +28,5 @@ export default {
       exports: 'auto'
     }
   ],
-  plugins: [
-    eslint(),
-    rollupTypescript({
-      // typescript
-      useTsconfigDeclarationDir: true
-    }),
-    autoExternal(),
-    commonjs()
-  ]
+  plugins: [ eslint(), typescript(), commonjs() ]
 }
