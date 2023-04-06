@@ -81,23 +81,12 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
     },
 
     /*
-      Report error catched from Sentry
-    */
-    __reportSentryError (message: string) {
-      if (legacyErrorHandlingMode) {
-        this.warn(message)
-      }
-      else {
-        throw new Error(message)
-      }
-    },
-
-    /*
       We starting plugin here, because at the moment vite completed with building
       so sourcemaps must be ready
     */
     async closeBundle () {
       const { enabled, sourcemapsCreated, isProduction } = pluginState
+      const reportSentryError = legacyErrorHandlingMode ? this.warn : this.error
 
       if (!enabled) {
         if (!isProduction) {
@@ -119,7 +108,7 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
         const currentRelease = await currentReleasePromise
 
         if (!currentRelease) {
-          this.__reportSentryError('Release returned from sentry is empty! Please check your config')
+          reportSentryError('Release returned from sentry is empty! Please check your config')
         }
         else {
           try {
@@ -162,7 +151,7 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
             }
           }
           catch (error) {
-            this.__reportSentryError(
+            reportSentryError(
               `Error while uploading sourcemaps to Sentry: ${error.message}`
             )
           }
