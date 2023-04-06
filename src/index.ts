@@ -8,7 +8,7 @@ const MODULE_ID = 'virtual:vite-plugin-sentry/sentry-config'
 const RESOLVED_ID = '\0' + MODULE_ID
 
 export default function ViteSentry (options: ViteSentryPluginOptions) {
-  const { skipEnvironmentCheck = false } = options
+  const { skipEnvironmentCheck = false, legacyErrorHandlingMode = false } = options
 
   const cli = createSentryCli(options)
   const currentReleasePromise = getReleasePromise(cli, options)
@@ -81,6 +81,18 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
     },
 
     /*
+      Report error catched from Sentry
+    */
+    __reportSentryError (message: string) {
+      if (legacyErrorHandlingMode) {
+        this.warn(message)
+      }
+      else {
+        throw new Error(message)
+      }
+    },
+
+    /*
       We starting plugin here, because at the moment vite completed with building
       so sourcemaps must be ready
     */
@@ -107,9 +119,7 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
         const currentRelease = await currentReleasePromise
 
         if (!currentRelease) {
-          this.warn(
-            'Release returned from sentry is empty! Please check your config'
-          )
+          this.__reportSentryError('Release returned from sentry is empty! Please check your config')
         }
         else {
           try {
@@ -152,7 +162,7 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
             }
           }
           catch (error) {
-            this.warn(
+            this.__reportSentryError(
               `Error while uploading sourcemaps to Sentry: ${error.message}`
             )
           }
