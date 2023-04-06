@@ -82,6 +82,12 @@ export interface ViteSentryPluginOptions extends ViteSentryCliOptions, ViteSentr
   skipEnvironmentCheck?: boolean
 
   /*
+    Enable error handling like in <= 1.1.8 versions
+    When we getting error from Sentry - just warn about and continue
+  */
+  legacyErrorHandlingMode?: boolean
+
+  /*
     Remove all artifacts in the release befire upload
   */
   cleanArtifacts?: boolean
