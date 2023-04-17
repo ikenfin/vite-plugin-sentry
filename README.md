@@ -1,8 +1,8 @@
-# Plugin to integrate Vite ⚡️ with Sentry
+# Plugin for Vite ⚡️ to create releases and upload sourcemaps to Sentry
 
 ![Version](https://img.shields.io/npm/v/vite-plugin-sentry)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](#)[![codecov](https://codecov.io/gh/ikenfin/vite-plugin-sentry/branch/master/graph/badge.svg?token=RAM0TAVIIQ)](https://codecov.io/gh/ikenfin/vite-plugin-sentry)
 
-> Vite plugin acts as interface to SentryCLI
+> This plugin hooks into the Vite build step, to create a new release and upload source maps. It does not instrument error reporting in your app.
 
 It's a port of official [Sentry webpack plugin](https://github.com/getsentry/sentry-webpack-plugin) for Vite.
 
