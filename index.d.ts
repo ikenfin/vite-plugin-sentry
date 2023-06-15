@@ -99,8 +99,6 @@ export interface ViteSentryPluginOptions
 
   /**
    * When is `true` - will drop sourcemap files from resulting bundle
-   * This option works only for Vite >= 4.0.0
-   * For earlier Vite versions see https://github.com/ikenfin/vite-plugin-sentry/issues/1
    * @default false
    */
   cleanSourcemapsAfterUpload?: boolean
