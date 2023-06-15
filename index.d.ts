@@ -10,113 +10,126 @@ import type {
   SentryCliNewDeployOptions
 } from '@sentry/cli'
 
-export interface ViteSentryPluginOptionsCommitsOptions extends SentryCliCommitsOptions {}
-export interface ViteSentryPluginOptionsSourceMapsOptions extends SentryCliUploadSourceMapsOptions {}
-export interface ViteSentryPluginOptionsNewDeployOptions extends SentryCliNewDeployOptions {}
+export interface ViteSentryPluginOptionsCommitsOptions
+  extends SentryCliCommitsOptions {}
+export interface ViteSentryPluginOptionsSourceMapsOptions
+  extends SentryCliUploadSourceMapsOptions {}
+export interface ViteSentryPluginOptionsNewDeployOptions
+  extends SentryCliNewDeployOptions {}
 
 export interface ViteSentryCliOptions {
 
-  /*
-    Path to sentry cli config file
-  */
+  /**
+   * Path to sentry cli config file
+   */
   configFile?: string
 
-  /*
-    Dry run mode
-  */
+  /**
+   * Dry run mode
+   * @default false
+   */
   dryRun?: boolean
 
-  /*
-    Url of sentry installation
-  */
+  /**
+   * Url of sentry installation
+   */
   url?: string
 
-  /*
-    Authentication token for API
-  */
+  /**
+   * Authentication token for API
+   */
   authToken?: string
 
-  /*
-    Organization slug
-  */
+  /**
+   * Organization slug
+   */
   org?: string
 
-  /*
-    Project slug
-  */
+  /**
+   * Project slug
+   */
   project?: string
 
-  /*
-    VCS remote name
-  */
+  /**
+   * VCS remote name
+   */
   vcsRemote?: string
 
-  /*
-    If true, all sentry-cli logs are suppressed
-  */
+  /**
+   * If true, all sentry-cli logs are suppressed
+   * @default false
+   */
   silent?: boolean
 }
 
 export interface ViteSentryCliReleaseOptions {
 
-  /*
-    Unique name for release
-    defaults to sentry-cli releases propose version (requires access to GIT and root directory to be repo)
-  */
+  /**
+   * Unique name for release
+   * defaults to sentry-cli releases propose version (requires access to GIT and root directory to be repo)
+   */
   release?: string
 }
 
-/*
-    Plugin input options
-*/
-export interface ViteSentryPluginOptions extends ViteSentryCliOptions, ViteSentryCliReleaseOptions  {
+/**
+ * Plugin input options
+ */
+export interface ViteSentryPluginOptions
+  extends ViteSentryCliOptions,
+    ViteSentryCliReleaseOptions {
 
-  /*
-    Show debug messages during run
-  */
+  /**
+   * Show debug messages during run
+   * @default false
+   */
   debug?: boolean
 
-  /*
-    Force enable sourcemaps uploading
-  */
+  /**
+   * Force enable sourcemaps uploading
+   * @default false
+   */
   skipEnvironmentCheck?: boolean
 
-  /*
-    Enable error handling like in <= 1.1.8 versions
-    When we getting error from Sentry - just warn about and continue
-  */
+  /**
+   * Enable error handling like in <= 1.1.8 versions
+   * When we getting error from Sentry - just warn about and continue
+   * @default false
+   */
   legacyErrorHandlingMode?: boolean
 
   /**
-    When is `true` - will drop sourcemap files from resulting bundle
-    This option works only for Vite >= 4.0.0
-    For earlier Vite versions see https://github.com/ikenfin/vite-plugin-sentry/issues/1
-  */
+   * When is `true` - will drop sourcemap files from resulting bundle
+   * This option works only for Vite >= 4.0.0
+   * For earlier Vite versions see https://github.com/ikenfin/vite-plugin-sentry/issues/1
+   * @default false
+   */
   cleanSourcemapsAfterUpload?: boolean
 
-  /*
-    Remove all artifacts in the release befire upload
-  */
+  /**
+   * Remove all artifacts in the release befire upload
+   * @default false
+   */
   cleanArtifacts?: boolean
 
-  /*
-    Determines whether processed release should be automatically finalized after artifacts upload
-  */
+  /**
+   * Determines whether processed release should be automatically finalized after artifacts upload
+   * @default false
+   */
   finalize?: boolean
 
-  /*
-    Deployment settings
-  */
+  /**
+   * Deployment settings
+   */
   deploy?: ViteSentryPluginOptionsNewDeployOptions
 
-  /*
-    Source maps settings
-  */
+  /**
+   * Source maps settings
+   */
   sourceMaps: ViteSentryPluginOptionsSourceMapsOptions
 
-  /*
-    Commits settings
-  */
+  /**
+   * Commits settings
+   */
   setCommits?: ViteSentryPluginOptionsCommitsOptions
 }
 
