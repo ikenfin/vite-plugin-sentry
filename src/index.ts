@@ -26,7 +26,7 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
     isProduction: false,
     sourcemapsCreated: false,
     baseDir: '',
-    sourcemapsFilePaths: [] as string[]
+    sourcemapsFilePaths: new Set<string>()
   }
 
   const viteSentryPlugin: Plugin = {
@@ -92,9 +92,10 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
     generateBundle (options, bundle) {
       if (cleanSourcemapsAfterUpload) {
         pluginState.baseDir = options.dir ?? ''
+        console.log(bundle)
         for (const file in bundle) {
-          if (file.endsWith('.map')) {
-            pluginState.sourcemapsFilePaths.push(file)
+          if (bundle[file]?.map) {
+            pluginState.sourcemapsFilePaths.add(`${file}.map`)
           }
         }
       }
@@ -175,10 +176,10 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
             if (
               cleanSourcemapsAfterUpload &&
               pluginState.sourcemapsCreated &&
-              pluginState.sourcemapsFilePaths.length > 0
+              pluginState.sourcemapsFilePaths.size > 0
             ) {
               for (const file of pluginState.sourcemapsFilePaths) {
-                this.info(`Deleting sourcemap file: ${file}`)
+                this.warn(`Deleting sourcemap file: ${file}`)
                 await unlink(path.join(pluginState.baseDir, file))
               }
             }
