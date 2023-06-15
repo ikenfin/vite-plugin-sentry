@@ -91,8 +91,9 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
 
     generateBundle (options, bundle) {
       if (cleanSourcemapsAfterUpload) {
+        // set basedir
         pluginState.baseDir = options.dir ?? ''
-        console.log(bundle)
+
         for (const file in bundle) {
           if (bundle[file]?.map) {
             pluginState.sourcemapsFilePaths.add(`${file}.map`)
