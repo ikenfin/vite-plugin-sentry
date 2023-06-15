@@ -87,6 +87,13 @@ export interface ViteSentryPluginOptions extends ViteSentryCliOptions, ViteSentr
   */
   legacyErrorHandlingMode?: boolean
 
+  /**
+    When is `true` - will drop sourcemap files from resulting bundle
+    This option works only for Vite >= 4.0.0
+    For earlier Vite versions see https://github.com/ikenfin/vite-plugin-sentry/issues/1
+  */
+  cleanSourcemapsAfterUpload?: boolean
+
   /*
     Remove all artifacts in the release befire upload
   */
