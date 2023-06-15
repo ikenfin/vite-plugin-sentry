@@ -13,7 +13,7 @@ const pkg = require('./package.json')
  */
 export default {
   input: 'src/index.ts',
-  external: [ 'util', 'vite', '@sentry/cli' ],
+  external: [ 'util', 'vite', '@sentry/cli', 'node:path', 'node:fs/promises' ],
   output: [
     {
       format: 'es',

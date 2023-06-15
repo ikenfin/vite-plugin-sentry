@@ -1,8 +1,8 @@
 import type { Plugin } from 'vite'
 import type { ViteSentryPluginOptions } from '..'
 
-import { unlink } from 'fs/promises'
-import path from 'path'
+import { unlink } from 'node:fs/promises'
+import path from 'node:path'
 
 import { createSentryCli } from './lib/create-cli'
 import { getReleasePromise } from './lib/get-release-promise'
