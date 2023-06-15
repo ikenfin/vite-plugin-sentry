@@ -1,6 +1,9 @@
 import type { Plugin } from 'vite'
 import type { ViteSentryPluginOptions } from '..'
 
+import { unlink } from 'fs/promises'
+import path from 'path'
+
 import { createSentryCli } from './lib/create-cli'
 import { getReleasePromise } from './lib/get-release-promise'
 
@@ -8,7 +11,11 @@ const MODULE_ID = 'virtual:vite-plugin-sentry/sentry-config'
 const RESOLVED_ID = '\0' + MODULE_ID
 
 export default function ViteSentry (options: ViteSentryPluginOptions) {
-  const { skipEnvironmentCheck = false, legacyErrorHandlingMode = false } = options
+  const {
+    skipEnvironmentCheck = false,
+    cleanSourcemapsAfterUpload = false,
+    legacyErrorHandlingMode = false
+  } = options
 
   const cli = createSentryCli(options)
   const currentReleasePromise = getReleasePromise(cli, options)
@@ -16,8 +23,10 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
   // plugin state
   let pluginState = {
     enabled: false,
+    isProduction: false,
     sourcemapsCreated: false,
-    isProduction: false
+    baseDir: '',
+    sourcemapsFilePaths: [] as string[]
   }
 
   const viteSentryPlugin: Plugin = {
@@ -80,6 +89,17 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
       }
     },
 
+    generateBundle (options, bundle) {
+      if (cleanSourcemapsAfterUpload) {
+        pluginState.baseDir = options.dir ?? ''
+        for (const file in bundle) {
+          if (file.endsWith('.map')) {
+            pluginState.sourcemapsFilePaths.push(file)
+          }
+        }
+      }
+    },
+
     /*
       We starting plugin here, because at the moment vite completed with building
       so sourcemaps must be ready
@@ -108,7 +128,9 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
         const currentRelease = await currentReleasePromise
 
         if (!currentRelease) {
-          reportSentryError('Release returned from sentry is empty! Please check your config')
+          reportSentryError(
+            'Release returned from sentry is empty! Please check your config'
+          )
         }
         else {
           try {
@@ -148,6 +170,17 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
             // set deploy options
             if (options.deploy && options.deploy.env) {
               await cli.releases.newDeploy(currentRelease, options.deploy)
+            }
+
+            if (
+              cleanSourcemapsAfterUpload &&
+              pluginState.sourcemapsCreated &&
+              pluginState.sourcemapsFilePaths.length > 0
+            ) {
+              for (const file of pluginState.sourcemapsFilePaths) {
+                this.info(`Deleting sourcemap file: ${file}`)
+                await unlink(path.join(pluginState.baseDir, file))
+              }
             }
           }
           catch (error) {
