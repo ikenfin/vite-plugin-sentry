@@ -45,7 +45,7 @@
     "@types/node": "^20.3.1",
     "@typescript-eslint/eslint-plugin": "5.59.11",
     "@typescript-eslint/parser": "5.59.11",
-    "eslint": "8.42.0",
+    "eslint": "8.44.0",
     "husky": "^8.0.0",
     "is-ci": "^3.0.1",
     "jest": "28.1.3",
