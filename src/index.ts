@@ -3,6 +3,7 @@ import type { ViteSentryPluginOptions } from '..'
 
 import { unlink } from 'node:fs/promises'
 import path from 'node:path'
+import {execSync} from 'node:child_process';
 
 import { createSentryCli } from './lib/create-cli'
 import { getReleasePromise } from './lib/get-release-promise'
@@ -182,6 +183,7 @@ export default function ViteSentry (options: ViteSentryPluginOptions) {
               for (const file of pluginState.sourcemapsFilePaths) {
                 this.warn(`Deleting sourcemap file: ${file}`)
                 await unlink(path.join(pluginState.baseDir, file))
+                execSync(`sed -i '' -e '/\\/\\/\\# sourceMappingURL.*/d' ${pluginState.baseDir}/**/*.js`)
               }
             }
           }
