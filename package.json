@@ -38,7 +38,7 @@
     "prepare": "is-ci || husky install"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "25.0.3",
+    "@rollup/plugin-commonjs": "25.0.5",
     "@rollup/plugin-eslint": "^9.0.0",
     "@rollup/plugin-typescript": "^11.0.0",
     "@types/jest": "^28.1.4",
