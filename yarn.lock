@@ -652,16 +652,59 @@
     estree-walker "^2.0.2"
     picomatch "^2.3.1"
 
+"@sentry/cli-darwin@2.30.5":
+  version "2.30.5"
+  resolved "https://registry.yarnpkg.com/@sentry/cli-darwin/-/cli-darwin-2.30.5.tgz#4cd19af5af233890ea5a72a443d342b24f06e2fa"
+  integrity sha512-wr6Z4LlagaJuylngPWMN5+soMP+CjySFkDULYlo/pvX1KtZ669umGcFQXns58p5zdzDtT7bin9an84M95CoPDg==
+
+"@sentry/cli-linux-arm64@2.30.5":
+  version "2.30.5"
+  resolved "https://registry.yarnpkg.com/@sentry/cli-linux-arm64/-/cli-linux-arm64-2.30.5.tgz#8d7f7bb7f394dcb876de02e0a1022b88ec9d56b7"
+  integrity sha512-HxS0+5QAmBmqFkNOONlXFayw+k17/I5l2ufQQxz8NqQHiS+Y7BsOCdFWpCH2O13Sqnuepb7DnqEvREOPRNpRwA==
+
+"@sentry/cli-linux-arm@2.30.5":
+  version "2.30.5"
+  resolved "https://registry.yarnpkg.com/@sentry/cli-linux-arm/-/cli-linux-arm-2.30.5.tgz#354263809ff25ab7cbcdc49de8bb46b85ba73a4d"
+  integrity sha512-47bpvtAOal+/QqCCZcc6irsUpH6Bcq8PbpTnUZvIhB5EZJpr22gZ3JvgIypijW4MdAoBSLfZpWQFy0gvnhVkrA==
+
+"@sentry/cli-linux-i686@2.30.5":
+  version "2.30.5"
+  resolved "https://registry.yarnpkg.com/@sentry/cli-linux-i686/-/cli-linux-i686-2.30.5.tgz#0294f5fe872e0f1a1ebc21129676ef7ca5ea73f7"
+  integrity sha512-r59EX0rOoVy6OURmozpU7wyj+ZIwNr3IQDWbFzoHsU8vENODpKQUXh954e9Oo1kCp+OWMY1z2mkUxOKnIaWzUQ==
+
+"@sentry/cli-linux-x64@2.30.5":
+  version "2.30.5"
+  resolved "https://registry.yarnpkg.com/@sentry/cli-linux-x64/-/cli-linux-x64-2.30.5.tgz#de88fcf91fa24165b454ca71ee9a29252c9064c2"
+  integrity sha512-6o2TVkNNFuqjmG8a1i9ve5Oyjr6pLUB/Yui25iI+ud2N1mnT3euo9DwnnUJEBADVKBn5oFaC/XOktj1srbZw4w==
+
+"@sentry/cli-win32-i686@2.30.5":
+  version "2.30.5"
+  resolved "https://registry.yarnpkg.com/@sentry/cli-win32-i686/-/cli-win32-i686-2.30.5.tgz#6a990ff5e4227579c0c9ff2974953eb8eb0a96a6"
+  integrity sha512-VbNtNx3Lt2yyXIeWlMMK9yCzRysf4X24orh/HD4U5/TpQlqDhy20A17dU1/ClNL5CPYUnYJ7ig2u5g+YEpEs6g==
+
+"@sentry/cli-win32-x64@2.30.5":
+  version "2.30.5"
+  resolved "https://registry.yarnpkg.com/@sentry/cli-win32-x64/-/cli-win32-x64-2.30.5.tgz#e04baf4f15684591818d944b9c7b5924d1a8b970"
+  integrity sha512-IvYuRgxHpiZayr2su72Ul3/vC2dvUyDOdO7+h8en3JPauFHBm3/dY8RVoJZMdrF2/yJ3xxvFyVcGEc8+DparAQ==
+
 "@sentry/cli@^2.3.1":
-  version "2.20.5"
-  resolved "https://registry.yarnpkg.com/@sentry/cli/-/cli-2.20.5.tgz#255a5388ca24c211a0eae01dcc4ad813a7ff335a"
-  integrity sha512-ZvWb86eF0QXH9C5Mbi87aUmr8SH848yEpXJmlM2AoBowpE9kKDnewCAKvyXUihojUFwCSEEjoJhrRMMgmCZqXA==
+  version "2.30.5"
+  resolved "https://registry.yarnpkg.com/@sentry/cli/-/cli-2.30.5.tgz#37f098c4e7c81c95730611135bdd741c803ae738"
+  integrity sha512-gAVmp67yDkY2LKm1cLNl26ovr05IfAhDjjiDJqiKviKqHuPIktdePLGqiwsQi8zyxlOZf6eC7ClDPmvA7+jHMQ==
   dependencies:
     https-proxy-agent "^5.0.0"
     node-fetch "^2.6.7"
     progress "^2.0.3"
     proxy-from-env "^1.1.0"
     which "^2.0.2"
+  optionalDependencies:
+    "@sentry/cli-darwin" "2.30.5"
+    "@sentry/cli-linux-arm" "2.30.5"
+    "@sentry/cli-linux-arm64" "2.30.5"
+    "@sentry/cli-linux-i686" "2.30.5"
+    "@sentry/cli-linux-x64" "2.30.5"
+    "@sentry/cli-win32-i686" "2.30.5"
+    "@sentry/cli-win32-x64" "2.30.5"
 
 "@sinclair/typebox@^0.24.1":
   version "0.24.51"
