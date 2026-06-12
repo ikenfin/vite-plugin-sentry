@@ -16,6 +16,9 @@
     "type": "git",
     "url": "https://github.com/ikenfin/vite-plugin-sentry"
   },
+  "bugs": {
+    "url": "https://github.com/ikenfin/vite-plugin-sentry/issues"
+  },
   "files": [
     "index.d.ts",
     "client.d.ts",
