@@ -1,12 +1,9 @@
-import { createFakeCli } from './create-fake-cli'
+import { jest, describe, it, expect, beforeEach } from '@jest/globals'
 
-import { jest } from '@jest/globals'
+import { createFakeCli } from './create-fake-cli'
 import { debugLogger } from './debug-logger'
 
-
-
 describe('Test create-fake-cli', () => {
-
   const release = 'test release'
 
   let mockedLogger: typeof debugLogger
@@ -19,7 +16,7 @@ describe('Test create-fake-cli', () => {
       }
     } as ReturnType<typeof createFakeCli>
 
-    mockedLogger = jest.fn((x, y) =>({ x, y }))
+    mockedLogger = jest.fn((x, y) => ({ x, y }))
 
     cli = createFakeCli(mockedSentry, mockedLogger)
   })
@@ -31,17 +28,27 @@ describe('Test create-fake-cli', () => {
   })
 
   it('Test cli.releases.proposeVersion', () => {
-    expect(cli.releases.proposeVersion()).resolves.toBe(release).then(() => {
-      expect(mockedLogger).toBeCalledTimes(1)
-      expect(mockedLogger).toBeCalledWith(expect.stringMatching(/Proposed version:\n/), release)
-    })
+    expect(cli.releases.proposeVersion())
+      .resolves.toBe(release)
+      .then(() => {
+        expect(mockedLogger).toBeCalledTimes(1)
+        expect(mockedLogger).toBeCalledWith(
+          expect.stringMatching(/Proposed version:\n/),
+          release
+        )
+      })
   })
 
   it('Test promise chain', () => {
     // cli.releases.proposeVersion()
-    expect(cli.releases.new(release)).resolves.toBe(release).then(() => {
-      expect(mockedLogger).toBeCalledTimes(1)
-      expect(mockedLogger).toBeCalledWith(expect.stringMatching(/Creating new release:\n/), release)
-    })
+    expect(cli.releases.new(release))
+      .resolves.toBe(release)
+      .then(() => {
+        expect(mockedLogger).toBeCalledTimes(1)
+        expect(mockedLogger).toBeCalledWith(
+          expect.stringMatching(/Creating new release:\n/),
+          release
+        )
+      })
   })
 })

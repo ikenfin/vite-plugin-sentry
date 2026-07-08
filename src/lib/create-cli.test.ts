@@ -1,3 +1,5 @@
+import { describe, it, expect } from '@jest/globals'
+
 import { createSentryCli } from './create-cli'
 import SentryCli from '@sentry/cli'
 
@@ -17,7 +19,6 @@ describe('Test create-cli', () => {
   })
 
   it('Check using defaults', () => {
-
     const mustBeConfig = {
       silent: false
     }
@@ -49,5 +50,4 @@ describe('Test create-cli', () => {
 
     expect(cli.options).toMatchObject(mustBeConfig)
   })
-
 })
